@@ -3,6 +3,6 @@ description: This example showcases object detection within a live feed from a U
 ports: []
 bricks:
 - arduino:video_object_detection:
-    model: ei-model-1044273-1
+    model: ei-model-1044273-3
 - arduino:web_ui: {}
 icon: 📽️

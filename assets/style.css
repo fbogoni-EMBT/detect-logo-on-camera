@@ -745,11 +745,9 @@ body {
   flex-shrink: 0;
 }
 
-@media (max-width: 1024px) {
-  #videoFeedContainer iframe {
-    width: 100%;
-    aspect-ratio: 1024 / 768;
-  }
+#videoFeedContainer img {
+  width: 100%;
+  height: auto;
 }
 
 .feedback-detection {
