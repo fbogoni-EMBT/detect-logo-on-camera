@@ -8,9 +8,6 @@ const feedbackContentElement = document.getElementById('feedback-content');
 const MAX_RECENT_SCANS = 5;
 let scans = [];
 
-const videoFrameElement = document.getElementById('videoFrame');
-const videoPlaceholderElement = document.getElementById('videoPlaceholder');
-
 const ui = new WebUI();
 ui.on_connect(onUIConnected);
 ui.on_disconnect(onUIDisconnected);
@@ -18,13 +15,6 @@ ui.on_message('detection', async message => {
   printDetection(message);
   renderDetections();
   updateFeedback(message);
-});
-ui.on_message('frame', base64Jpeg => {
-  videoFrameElement.src = `data:image/jpeg;base64,${base64Jpeg}`;
-  if (videoFrameElement.style.display === 'none') {
-    videoPlaceholderElement.style.display = 'none';
-    videoFrameElement.style.display = 'block';
-  }
 });
 
 // Start the application

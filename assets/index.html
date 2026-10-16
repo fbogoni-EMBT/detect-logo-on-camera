@@ -26,7 +26,13 @@ SPDX-License-Identifier: MPL-2.0
               <img src="./img/no-face.svg" alt="Searching webcam" />
               <p class="feedback-text">Searching Webcam...</p>
             </div>
-            <img id="videoFrame" alt="Video stream" style="display: none; width: 100%; height: auto" />
+            <iframe
+              id="dynamicIframe"
+              title="Video stream"
+              width="1024px"
+              height="768px"
+              frameborder="0"
+              style="display: none"></iframe>
           </div>
         </div>
 
@@ -91,6 +97,32 @@ SPDX-License-Identifier: MPL-2.0
       </div>
       <div id="error-container" class="error-message" style="display: none"></div>
     </div>
+
+    <script>
+      const iframe = document.getElementById('dynamicIframe');
+      const placeholder = document.getElementById('videoPlaceholder');
+      const currentHostname = window.location.hostname;
+      const targetPort = 4912;
+      const targetPath = '/embed';
+      const streamUrl = `http://${currentHostname}:${targetPort}${targetPath}`;
+
+      let intervalId;
+
+      iframe.onload = () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+        placeholder.style.display = 'none';
+        iframe.style.display = 'block';
+      };
+
+      const startLoading = () => {
+        // Set the src to start loading
+        iframe.src = streamUrl;
+      };
+
+      intervalId = setInterval(startLoading, 1000); // Try to load every second
+    </script>
 
     <script src="libs/socket.io.min.js"></script>
     <script src="libs/arduino.js"></script>
